@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple web page with a Yandex Smart Captcha integration">
+    <title>Yandex Smart Captcha Integration</title>
+    <script src="https://smartcaptcha.yandexcloud.net/captcha.js" defer></script>
+    <style>
+        .captcha-box {
+            display: flex;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            margin-top: 20px;
+        }
+        .captcha-checkbox {
+            margin-right: 10px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .captcha-label {
+            font-size: 14px;
+        }
+        #captchaResult {
+            margin-top: 10px;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Yandex Smart Captcha Demo</h1>
+    <p>Please complete one of the CAPTCHA options below to proceed:</p>
+    
+    <!-- Yandex Smart CAPTCHA -->
+    <div 
+        id="captcha-container"
+        class="smart-captcha"
+        data-sitekey="ysc1_4Y1ZxV5Zyyme7tQXujwZsW9AikoIXYfjiorOf5gzc41223cd"
+        style="height: 100px;"
+    ></div>
+    
+    <!-- Custom Checkbox CAPTCHA -->
+    <div class="captcha-box">
+        <input type="checkbox" id="customCaptchaCheckbox" class="captcha-checkbox">
+        <label for="customCaptchaCheckbox" class="captcha-label">I'm not a robot</label>
+    </div>
+    <p id="captchaResult"></p>
+
+    <script>
+        // Custom CAPTCHA validation
+        const customCaptchaCheckbox = document.getElementById('customCaptchaCheckbox');
+        const captchaResult = document.getElementById('captchaResult');
+
+        customCaptchaCheckbox.addEventListener('change', () => {
+            if (customCaptchaCheckbox.checked) {
+                // Simulate backend validation
+                const humanDetected = true; // Replace with real validation logic if needed
+
+                if (humanDetected) {
+                    captchaResult.textContent = "Custom CAPTCHA passed!";
+                    captchaResult.style.color = "green";
+                } else {
+                    captchaResult.textContent = "Custom CAPTCHA failed. Please try again.";
+                    captchaResult.style.color = "red";
+                    customCaptchaCheckbox.checked = false;
+                }
+            } else {
+                captchaResult.textContent = "";
+            }
+        });
+    </script>
+</body>
+</html>
